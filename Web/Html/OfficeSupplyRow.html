@@ -1,0 +1,36 @@
+﻿<tr class="tbodyRow" data-row="{Replace-Index}">
+    <td class="addRow auto-style8 auto-style6" title="点击删除该行" onclick="DelRow(this)">
+        -
+    </td>
+    <td class="auto-style8 auto-style6" style="width:60px">
+        <label class="rowIndexLabel">{Replace-Index}</label>
+        <input class="rowIndexHidden" type="hidden" id="rowIndex_{Replace-Index}" name="rowIndex_{Replace-Index}" value="{Replace-Index}" />
+    </td>
+    <td class="auto-style8 auto-style10">
+        {Replace-ProductType}
+    </td>
+    <td class="auto-style8">
+        <input class="Name ItemAutoComplete" id="Name_{Replace-Index}" name="Name_{Replace-Index}" style="width: 85%;" />
+        <img class="HerCss" onclick="openselectOfficeName(this);" src="../images/Button/search.gif" />
+    </td>
+    <td class="auto-style8">
+        <input class="Model" id="Model_{Replace-Index}" name="Model_{Replace-Index}" style="width: 85%;" />
+        <img class="HerCss" onclick="openselectOfficeModel(this);" src="../images/Button/search.gif" />
+    </td>
+    <td class="auto-style8 auto-style9">
+        <input id="Quantity_{Replace-Index}" class="supplyQuantity" name="Quantity_{Replace-Index}" style="width: 95%; ime-mode: disabled;" onkeypress="if((event.keyCode<48||event.keyCode>57)&&event.keyCode!=45&&event.keyCode!=46)event.returnValue=false;" onpaste="return false;" />
+    </td>
+    <td class="auto-style8 auto-style10">
+        {Replace-Unit}
+        <input type="image" class="btnChangeUnit" onclick="return false;" src="../images/zhedie.gif" style="height:15px;border-width:0px;display:{Replace-Display}">
+    </td>
+    <td class="auto-style8 auto-style9">
+        <input id="Price_{Replace-Index}" class="supplyPrice" name="Price_{Replace-Index}" style="width: 80%; ime-mode: disabled;" onkeypress="if((event.keyCode<48||event.keyCode>57)&&event.keyCode!=45&&event.keyCode!=46)event.returnValue=false;" onpaste="return false;" />元
+    </td>
+    <td class="auto-style8 auto-style9">
+        <input id="Total_{Replace-Index}" class="supplyTotal" name="Total_{Replace-Index}" readonly="readonly" style="width: 80%; ime-mode: disabled;" onkeypress="if((event.keyCode<48||event.keyCode>57)&&event.keyCode!=45&&event.keyCode!=46)event.returnValue=false;" onpaste="return false;" />元
+    </td>
+    <td class="auto-style8" style="width:200px">
+        <input id="Comment_{Replace-Index}" class="Comment" name="Comment_{Replace-Index}" style="width: 95%;" />
+    </td>
+</tr>

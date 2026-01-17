@@ -1,0 +1,26 @@
+﻿@import "../../JS/metronic/assets/global/plugins/font-awesome/css/font-awesome.min.css";
+@import "../../JS/metronic/assets/global/plugins/simple-line-icons/simple-line-icons.min.css";
+@import "../../JS/metronic/assets/global/plugins/bootstrap/css/bootstrap.min.css";
+@import "../../JS/metronic/assets/global/plugins/uniform/css/uniform.default.css";
+@import "../../JS/metronic/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css";
+
+@import "../../JS/metronic/assets/global/plugins/select2/select2.css";
+
+@import "../../JS/metronic/assets/global/css/components.css";
+@import "../../JS/metronic/assets/global/css/plugins.css";
+@import "../../JS/metronic/assets/admin/layout/css/layout.css";
+@import "../../JS/metronic/assets/admin/layout/css/themes/darkblue.css";
+@import "../../JS/metronic/assets/admin/layout/css/custom.css";
+
+@import "../../JS/metronic/assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css";
+
+/*日期选择*/
+@import "../../JS/metronic/assets/global/plugins/clockface/css/clockface.css";
+@import "../../JS/metronic/assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css";
+@import "../../JS/metronic/assets/global/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css";
+@import "../../JS/metronic/assets/global/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css";
+@import "../../JS/metronic/assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css";
+
+@import "../../JS/metronic/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css";
+
+@import "../../JS/metronic/assets/global/plugins/icheck/skins/all.css";

@@ -1,0 +1,225 @@
+﻿*
+{
+    padding: 0;
+    margin: 0;
+}
+
+body
+{
+    font: 11px Tahoma;
+    background-color: #F7F7E9;
+}
+
+h1
+{
+    font: 32px Times;
+    color: #666;
+    text-align: center;
+    padding: 20px 0;
+}
+
+#container
+{
+    width: 700px;
+    margin: 10px auto;
+}
+
+.mGrid
+{
+    background-color: #fff;
+    margin: 5px 0 10px 0;
+    border: solid 1px #525252;
+    border-collapse: collapse;
+}
+
+    .mGrid td
+    {
+        padding: 2px;
+        border: solid 1px #c1c1c1;
+        color: #717171;
+    }
+
+    .mGrid th
+    {
+        padding: 4px 2px;
+        color: #fff;
+        background: #cbdaef url(grd_head.png) repeat-x top;
+        border-left: solid 1px #525252;
+        font-size: 0.9em;
+    }
+
+    .mGrid .alt
+    {
+        background: #fcfcfc url(grd_alt.png) repeat-x top;
+    }
+    /*.mGrid .pgr {background: #424242 url(grd_pgr.png) repeat-x top; }*/
+    .mGrid .pgr table
+    {
+        margin: 5px 0;
+    }
+
+    .mGrid .pgr td
+    {
+        border-width: 0;
+        padding: 0 6px;
+        border-left: solid 1px #666;
+        font-weight: bold;
+        color: #fff;
+        line-height: 12px;
+    }
+
+    .mGrid .pgr a
+    {
+        color: #666;
+        text-decoration: none;
+    }
+
+        .mGrid .pgr a:hover
+        {
+            color: #000;
+            text-decoration: none;
+        }
+
+table.admintable
+{
+    border: 1px solid #AEDEF2;
+    border-collapse: collapse;
+}
+
+table.admintable_s2
+{
+    color: #658fd4;
+    border-bottom: #aedef2 thin solid;
+    border-left: #aedef2 thin solid;
+    border-right: #aedef2 thin solid;
+    border-top: #aedef2 thin solid;
+    background-color: #eef6fe;
+    font-size: 12px;
+    font-family: "新宋体";
+    overflow: auto;
+}
+
+td.admintd
+{
+    color: #0066cc;
+    font-size: 14px;
+    color: #05B;
+}
+
+th.adminth
+{
+    width: 671px;
+    color: #0066cc;
+    background-color: #eef6fe;
+    font-size: 14px;
+    color: #05B;
+    border: 1px solid #AEDEF2;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr=#AEDEF2,endColorStr=ghostwhite);
+}
+
+th.adminth_s2
+{
+    width: 671px;
+    color: #0066cc;
+    background-color: #eef6fe;
+    font-size: 14px;
+    color: #05B;
+    border: 1px solid #AEDEF2;
+}
+
+td.admincls0
+{
+    border: 1px solid #AEDEF2;
+    background: ghostwhite;
+    font-size: 12px;
+    font-family: 新宋体;
+    color: #333;
+}
+
+td.admincls1
+{
+    border: 1px solid #AEDEF2;
+    background: #DAF0F1;
+    font-size: 12px;
+    font-family: 新宋体;
+    color: #333;
+}
+
+th.menu
+{
+    color: #006699;
+    font-family: "新宋体";
+    font-size: 14px;
+}
+
+td.stagetd
+{
+    color: #236E11;
+    font-size: 14px;
+    font-family: "新宋体";
+    border-bottom: #456602 thin dashed;
+    background: #EBFEC5;
+}
+
+table.stage
+{
+    border-bottom: #FFFFFF thin solid;
+    border-left: #FFFFFF thin solid;
+    border-right: #FFFFFF thin solid;
+    border-top: #FFFFFF thin solid;
+    font-size: 14px;
+    font-family: "新宋体";
+    overflow: auto;
+}
+
+tr.stagetr_tr1
+{
+    border-bottom: #FFFFFF thin solid;
+    border-left: #FFFFFF thin solid;
+    border-right: #FFFFFF thin solid;
+    border-top: #FFFFFF thin solid;
+    background-color: #EBFEC5;
+    font-size: 12px;
+    font-family: "新宋体";
+}
+
+tr.stagetr_tr2
+{
+    border-bottom: #FFFFFF thin solid;
+    border-left: #FFFFFF thin solid;
+    border-right: #FFFFFF thin solid;
+    border-top: #FFFFFF thin solid;
+    font-size: 12px;
+    font-family: "新宋体";
+}
+
+.btn
+{
+    border-right: #7b9ebd 1px solid;
+    padding-right: 2px;
+    border-top: #7b9ebd 1px solid;
+    padding-left: 2px;
+    font-size: 12px;
+    /*FILTER: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr=#ffffff, EndColorStr=#cecfde);*/
+    border-left: #7b9ebd 1px solid;
+    /*cursor: hand;*/
+    color: black;
+    padding-top: 2px;
+    border-bottom: #7b9ebd 1px solid;
+}
+
+.btn_2k3
+{
+    border-right: #002D96 1px solid;
+    padding-right: 2px;
+    border-top: #002D96 1px solid;
+    padding-left: 2px;
+    font-size: 12px;
+    FILTER: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr=#FFFFFF, EndColorStr=#9DBCEA);
+    border-left: #002D96 1px solid;
+    cursor: hand;
+    color: black;
+    padding-top: 2px;
+    border-bottom: #002D96 1px solid;
+}
+

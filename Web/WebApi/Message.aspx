@@ -1,0 +1,1 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Message.aspx.cs" Inherits="WebApi_Message" %>

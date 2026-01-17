@@ -1,0 +1,49 @@
+﻿.float {
+    float: left;
+    width: 100px;
+    height: 100px;
+    /*overflow: hidden;*/
+    border: 1px solid #CCCCCC;
+    margin: 5px 5px 5px 0px;
+}
+
+.result img {
+    position: relative;
+    width: 100px;
+    height: 100px;
+}
+
+.result {
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    box-sizing: border-box;
+    position: relative;
+}
+
+
+#file_input {
+    display: none;
+}
+
+
+.delete {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    z-index: 999;
+    font-size: 30px;
+    background:url(../../images/deleteicon.png) center center no-repeat;
+}
+
+
+.delete:hover {
+    cursor: pointer;
+    opacity: 1;
+}
+
+.uploadimgs i {
+    padding-right: 5px;
+}

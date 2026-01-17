@@ -1,0 +1,344 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1779321D-1013-4510-86B0-B1D7700EDD4F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ZWL.BLL</RootNamespace>
+    <AssemblyName>BLL</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaseSyslog.cs" />
+    <Compile Include="ERPBaoCan.cs" />
+    <Compile Include="ERPCaiDan.cs" />
+    <Compile Include="ERPCostDetailPostSum.cs" />
+    <Compile Include="ERPMingCeFanPin.cs" />
+    <Compile Include="ERPNWorkToDoModifyLog.cs" />
+    <Compile Include="ERPOfficeSupplyInventory.cs" />
+    <Compile Include="ERPOfficeSupplyItem.cs" />
+    <Compile Include="ERPOfficeSupplyStockIn.cs" />
+    <Compile Include="ERPOfficeSupplyStockInDetail.cs" />
+    <Compile Include="ERPOfficeSupplyStockOut.cs" />
+    <Compile Include="ERPOfficeSupplyStockOutDetail.cs" />
+    <Compile Include="ERPOfficeSupplyType.cs" />
+    <Compile Include="ERPShouWenBanWenShare.cs" />
+    <Compile Include="ERPShouWenBanWenShareRecipient.cs" />
+    <Compile Include="ERPXMZLGuiDangSummary.cs" />
+    <Compile Include="FanTangJiuCanRecord.cs" />
+    <Compile Include="FanTangJiuCanRecordReport.cs" />
+    <Compile Include="FanTangJiuCanSummary.cs" />
+    <Compile Include="Token.cs" />
+    <Compile Include="TokenLogs.cs" />
+    <Compile Include="YuErLeaveChangeLog.cs" />
+    <Compile Include="YuErLeave.cs" />
+    <Compile Include="DuShengLeaveChangeLog.cs" />
+    <Compile Include="DuShengLeave.cs" />
+    <Compile Include="BasePrintDev.cs" />
+    <Compile Include="BaseTableRelativeColumn.cs" />
+    <Compile Include="ContractTeamMachine.cs" />
+    <Compile Include="ContractTeamMoney.cs" />
+    <Compile Include="Dfsdl.cs" />
+    <Compile Include="EnumCollection.cs" />
+    <Compile Include="ERPAnPai.cs" />
+    <Compile Include="ERPArea.cs" />
+    <Compile Include="ERPAutoAlertLog.cs" />
+    <Compile Include="ERPBaoJia.cs" />
+    <Compile Include="ERPBaoXiao.cs" />
+    <Compile Include="ERPBBSBanKuai.cs" />
+    <Compile Include="ERPBBSTieZi.cs" />
+    <Compile Include="ERPBook.cs" />
+    <Compile Include="ERPBookJieHuan.cs" />
+    <Compile Include="ERPBudget.cs" />
+    <Compile Include="ERPBudgetDetail.cs" />
+    <Compile Include="ERPBudgetDetailExtend.cs" />
+    <Compile Include="ERPBuMen.cs" />
+    <Compile Include="ERPBuMenQingJia.cs" />
+    <Compile Include="ERPBuMenQingJiaDtl.cs" />
+    <Compile Include="ERPBuQian.cs" />
+    <Compile Include="ERPBuXiuJiaType.cs" />
+    <Compile Include="ERPBuyChanPin.cs" />
+    <Compile Include="ERPBuyOrder.cs" />
+    <Compile Include="ERPCarBaoXian.cs" />
+    <Compile Include="ERPCarBaoYang.cs" />
+    <Compile Include="ERPCarInfo.cs" />
+    <Compile Include="ERPCarJiaYou.cs" />
+    <Compile Include="ERPCarLog.cs" />
+    <Compile Include="ERPCarShiYong.cs" />
+    <Compile Include="ERPCarUseSP.cs" />
+    <Compile Include="ERPCarWeiHu.cs" />
+    <Compile Include="ERPCarWeiZhang.cs" />
+    <Compile Include="ERPChuChai.cs" />
+    <Compile Include="ERPChuShengShenQing.cs" />
+    <Compile Include="ERPConference.cs" />
+    <Compile Include="ERPContractTeam.cs" />
+    <Compile Include="ERPCostDetail.cs" />
+    <Compile Include="ERPCommon.cs" />
+    <Compile Include="ERPContract.cs" />
+    <Compile Include="ERPContractChanPin.cs" />
+    <Compile Include="ERPCostDetailPost.cs" />
+    <Compile Include="ERPCostDetailPostItems.cs" />
+    <Compile Include="ERPCostDetailPostItemsWorkload.cs" />
+    <Compile Include="ERPCustomFuWu.cs" />
+    <Compile Include="ERPCustomHuiFang.cs" />
+    <Compile Include="ERPCustomInfo.cs" />
+    <Compile Include="ERPCustomNeed.cs" />
+    <Compile Include="ERPCYDIC.cs" />
+    <Compile Include="ERPDangAn.cs" />
+    <Compile Include="ERPDangBanActivityAttendInfo.cs" />
+    <Compile Include="ERPDangBanActivityInfo.cs" />
+    <Compile Include="ERPDanWeiInfo.cs" />
+    <Compile Include="ERPDZZLCGJieYue.cs" />
+    <Compile Include="ERPDZZLCGJieYueDtl.cs" />
+    <Compile Include="ERPFaWenDJ.cs" />
+    <Compile Include="ERPFeedBack.cs" />
+    <Compile Include="ERPFeedBackImgs.cs" />
+    <Compile Include="ERPFeedBackOpinions.cs" />
+    <Compile Include="ERPFileList.cs" />
+    <Compile Include="ERPFoodMenu.cs" />
+    <Compile Include="ERPFoodOrder.cs" />
+    <Compile Include="ERPFoodProduct.cs" />
+    <Compile Include="ERPGaizhang.cs" />
+    <Compile Include="ERPGKProjectGWGL.cs" />
+    <Compile Include="ERPGongGao.cs" />
+    <Compile Include="ERPGuDing.cs" />
+    <Compile Include="ERPGuDingJiLu.cs" />
+    <Compile Include="ERPHeTong.cs" />
+    <Compile Include="ERPHeTongDaoZhang.cs" />
+    <Compile Include="ERPHeTongJieYue.cs" />
+    <Compile Include="ERPHeTongJieYueDetail.cs" />
+    <Compile Include="ERPHeTongShouKuan.cs" />
+    <Compile Include="ERPHeTongShouKuanCorp.cs" />
+    <Compile Include="ERPHeTongVersion.cs" />
+    <Compile Include="ERPHeTongYuShouKuan.cs" />
+    <Compile Include="ERPHoliday.cs" />
+    <Compile Include="ERPHTJieSuan.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ERPHuiBao.cs" />
+    <Compile Include="ERPHuiYuan.cs" />
+    <Compile Include="ERPInnerInviteBidReport.cs" />
+    <Compile Include="ERPInnerInviteBidReportDetail.cs" />
+    <Compile Include="ERPInnerInviteBidRequest.cs" />
+    <Compile Include="ERPipstr.cs" />
+    <Compile Include="ERPJiangCheng.cs" />
+    <Compile Include="ERPJiangChengZhiDu.cs" />
+    <Compile Include="ERPJianLi.cs" />
+    <Compile Include="ERPJiaoSe.cs" />
+    <Compile Include="ERPJinDu.cs" />
+    <Compile Include="ERPJiXiao.cs" />
+    <Compile Include="ERPJiXiaoCanShu.cs" />
+    <Compile Include="ERPJSDIC.cs" />
+    <Compile Include="ERPJuanKu.cs" />
+    <Compile Include="ERPJXDetails.cs" />
+    <Compile Include="ERPKaoQin.cs" />
+    <Compile Include="ERPKaoQinSetting.cs" />
+    <Compile Include="ERPKeyValue.cs" />
+    <Compile Include="ERPLanEmail.cs" />
+    <Compile Include="ERPLinkLog.cs" />
+    <Compile Include="ERPLinkMan.cs" />
+    <Compile Include="ERPLiRun.cs" />
+    <Compile Include="ERPListOfExpended.cs" />
+    <Compile Include="ERPListOfExpendedDetail.cs" />
+    <Compile Include="ERPMeeting.cs" />
+    <Compile Include="ERPMianShi.cs" />
+    <Compile Include="ERPMingCeHeTongZhiZhiGong.cs" />
+    <Compile Include="ERPMingCeLaoWuPaiQian.cs" />
+    <Compile Include="ERPMingCeLiTuiXiu.cs" />
+    <Compile Include="ERPMingCeZaiBianZhiGong.cs" />
+    <Compile Include="ERPMobile.cs" />
+    <Compile Include="ERPNetEmail.cs" />
+    <Compile Include="ERPNForm.cs" />
+    <Compile Include="ERPNFormType.cs" />
+    <Compile Include="ERPNWorkDetails.cs" />
+    <Compile Include="ERPNWorkFlow.cs" />
+    <Compile Include="ERPNWorkFlowNode.cs" />
+    <Compile Include="ERPNWorkFlowToDoUser.cs" />
+    <Compile Include="ERPNWorkToDo.cs" />
+    <Compile Include="ERPNWorkToDoExtend.cs" />
+    <Compile Include="ERPNWorkToDoLog.cs" />
+    <Compile Include="ERPOffice.cs" />
+    <Compile Include="ERPOfficeSupply.cs" />
+    <Compile Include="ERPOfficeSupplyDetail.cs" />
+    <Compile Include="ERPOfficeSupplySummary.cs" />
+    <Compile Include="ERPOfficeSupplySummaryDetail.cs" />
+    <Compile Include="ERPPeiXun.cs" />
+    <Compile Include="ERPPeiXunRiJi.cs" />
+    <Compile Include="ERPPeiXunXiaoGuo.cs" />
+    <Compile Include="ERPPinShen.cs" />
+    <Compile Include="ERPPOPAndSMTP.cs" />
+    <Compile Include="ERPProduct.cs" />
+    <Compile Include="ERPProject.cs" />
+    <Compile Include="ERPProjectCost.cs" />
+    <Compile Include="ERPProjectFenBaoShenPi.cs" />
+    <Compile Include="ERPProjectRequire.cs" />
+    <Compile Include="ERPProjectRequireField.cs" />
+    <Compile Include="ERPProjectRequireWFN.cs" />
+    <Compile Include="ERPQingJia.cs" />
+    <Compile Include="ERPRedHead.cs" />
+    <Compile Include="ERPReimburse.cs" />
+    <Compile Include="ERPRenChaiTiDui.cs" />
+    <Compile Include="ERPRenShiHeTong.cs" />
+    <Compile Include="ERPReport.cs" />
+    <Compile Include="ERPReportType.cs" />
+    <Compile Include="ERPRiZhi.cs" />
+    <Compile Include="ERPSaveFileName.cs" />
+    <Compile Include="ERPSheBei.cs" />
+    <Compile Include="ERPShenPi.cs" />
+    <Compile Include="ERPShiShi.cs" />
+    <Compile Include="ERPShouKuan.cs" />
+    <Compile Include="ERPShouWenBanWen.cs" />
+    <Compile Include="ERPSMZLCGJieYue.cs" />
+    <Compile Include="ERPSMZLCGJieYueDtl.cs" />
+    <Compile Include="ERPSongYang.cs" />
+    <Compile Include="ERPSubcontractTeam.cs" />
+    <Compile Include="ERPSupplyLink.cs" />
+    <Compile Include="ERPSupplys.cs" />
+    <Compile Include="ERPSystemSetting.cs" />
+    <Compile Include="ERPTalkInfo.cs" />
+    <Compile Include="ERPTalkOnlineUser.cs" />
+    <Compile Include="ERPTalkSetting.cs" />
+    <Compile Include="ERPTaskFP.cs" />
+    <Compile Include="ERPTBBaoZhengJin.cs" />
+    <Compile Include="ERPTelFile.cs" />
+    <Compile Include="ERPTelFileList.cs" />
+    <Compile Include="ERPTelFileRecipient.cs" />
+    <Compile Include="ERPTiKu.cs" />
+    <Compile Include="ERPTiKuKaoShi.cs" />
+    <Compile Include="ERPTiKuKaoShiJieGuo.cs" />
+    <Compile Include="ERPTiKuShiJuan.cs" />
+    <Compile Include="ERPTiKuType.cs" />
+    <Compile Include="ERPTiXing.cs" />
+    <Compile Include="ERPTongXunLu.cs" />
+    <Compile Include="ERPTouBiao.cs" />
+    <Compile Include="ERPTouSu.cs" />
+    <Compile Include="ERPTrain.cs" />
+    <Compile Include="ERPTreeList.cs" />
+    <Compile Include="ERPUser.cs" />
+    <Compile Include="ERPUserDesk.cs" />
+    <Compile Include="ERPUserDetail.cs" />
+    <Compile Include="ERPUserDetailChange.cs" />
+    <Compile Include="ERPVote.cs" />
+    <Compile Include="ERPWaiChuHuoDong.cs" />
+    <Compile Include="ERPWorkPlan.cs" />
+    <Compile Include="ERPWorkRiZhi.cs" />
+    <Compile Include="ERPXCDetails.cs" />
+    <Compile Include="ERPXinChou.cs" />
+    <Compile Include="ERPXinChouCanShu.cs" />
+    <Compile Include="ERPXMChengGuo.cs" />
+    <Compile Include="ERPXMChengGuoStampFile.cs" />
+    <Compile Include="ERPXMChengGuoStampFileDetail.cs" />
+    <Compile Include="ERPXMCJJCPG.cs" />
+    <Compile Include="ERPXMJBXX.cs" />
+    <Compile Include="ERPXMJBXXExtend.cs" />
+    <Compile Include="ERPXMQLCReport.cs" />
+    <Compile Include="ERPXMQQDJ.cs" />
+    <Compile Include="ERPXMZLGuiDang.cs" />
+    <Compile Include="ERPXMZLGuiDangDetail.cs" />
+    <Compile Include="ERPXueXi.cs" />
+    <Compile Include="ERPXueXiXinDe.cs" />
+    <Compile Include="ERPYinZhang.cs" />
+    <Compile Include="ERPYinZhangLog.cs" />
+    <Compile Include="ERPPhotoNews.cs" />
+    <Compile Include="Flow.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SubWorkFlowState.cs" />
+    <Compile Include="VacationLeave.cs" />
+    <Compile Include="ValidateCode.cs" />
+    <Compile Include="Yfsdl.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{2BD96671-63CA-4DED-9798-FBA5A57922B6}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DBUtility\DBUtility.csproj">
+      <Project>{B2CB0F25-F746-413B-BB57-4E22596AAF98}</Project>
+      <Name>DBUtility</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

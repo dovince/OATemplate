@@ -1,0 +1,27 @@
+﻿body 
+{
+    margin:0;
+    padding:0;
+    background-color:#2373AE;
+    font-size:14px;
+     font-family:宋体;
+}
+.main{ width:100%; margin:0 auto; text-align:center;}
+.center{ background-image:url('../images/login/bg.png'); background-repeat:no-repeat; width:1000px; height:489px; margin:130px auto 0 auto;}
+.logo{margin:0 auto 130px auto; width:388px;}
+.user{ margin:10px auto; width:350px; }
+.user_left{ width:100px; height:25px; float:left; padding-right:10px;  text-align:right; line-height:25px; color:#5198cd; font-size:14px;}
+.user_right{ text-align:left;}
+.clear{clear:both;}
+
+.user_textbox{height:25px; width:170px; border:1px solid #8bb9dc;}
+
+.remember{ width:300px; margin:15px auto;}
+.rem_user{float:left; padding:0 0 0 40px; font-size:12px;}
+.rem_pass{float:left; padding:0 0 0 75px;font-size:12px;}
+
+
+.btn_submit{margin:20px auto 0 auto; width :130px; height:36px;background-image:url('../images/login/btn_bg.png'); line-height:36px;}
+.btn_submit span{ color:White; font-weight:bold;}
+
+.copyright{ color:#eff7ff; font-size:10px; font-family:微软雅黑; margin:130px 0 0 0;}

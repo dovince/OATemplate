@@ -1,0 +1,43 @@
+﻿.border-bottom {
+    border-bottom: 1px solid #efefef;
+}
+
+.border-left {
+    padding-top: 0px !important;
+    border-left: 1px solid #efefef;
+}
+
+.control-label {
+    padding-top: 7px;
+    text-align: right;
+}
+
+.split {
+    padding-top: 10px;
+}
+
+.filesplit {
+    padding-left: 10px;
+}
+
+.icheck input {
+    width: 20px;
+    height: 20px;
+}
+
+iframe {
+    width: 100%;
+    border: 0;
+    min-height: 50px;
+}
+
+.QTCSS {
+    width: 97% !important;
+    height: 60px !important;
+    margin-left: 10px !important;
+}
+
+.special {
+    padding-left:0px;
+    padding-right:0px;
+}

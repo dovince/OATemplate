@@ -1,0 +1,3 @@
+﻿<asp:Label  runat="server"  CssClass="form-control-static"></asp:Label>
+<asp:TextBox  runat="server" CssClass="form-control"/>
+<asp:TextBox runat="server" CssClass="form-control form-control-inline date-picker" data-date-format="yyyy年mm月dd日" SkinID="Date" Width="150"/>

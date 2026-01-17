@@ -1,0 +1,38 @@
+﻿<tr>
+    <td style="text-align: center; background-color: #ffffff;">
+        <label class="rowIndexLabel">{Replace-Index}</label>
+        <input type="hidden" id="rowIndex_{Replace-Index}" name="rowIndex_{Replace-Index}" value="{Replace-Index}" class="rowIndexHidden" onchange="InputOnchange(this)" />
+    </td>
+    <td style="text-align: center; background-color: #ffffff;">
+        <input id="ZLName_{Replace-Index}" name="ZLName_{Replace-Index}" class="com_input ZLName" value="ZLName_Value" onchange="InputOnchange(this)" />
+    </td>
+    <td style="text-align: center; background-color: #ffffff;">
+        <select id="select_ZLDW_{Replace-Index}" name="select_ZLDW_{Replace-Index}" class="com_input SelectZLDW" onchange="selectHandler(this)">
+            <option>本</option>
+            <option>份</option>
+            <option>张</option>
+            <option>套</option>
+            <option>页</option>
+            <option>其他</option>
+        </select>
+        <input id="QT_ZLDW_{Replace-Index}" name="QT_ZLDW_{Replace-Index}" class="com_input QTZLDW" value="QTZLDW_Value" style="text-align: center;display:none;" onchange="InputOnchange(this)" />
+    </td>
+    <td style="text-align: center; background-color: #ffffff;">
+        <!-- easyui-numberspinner -->
+        <input id="ZLCount_{Replace-Index}" name="ZLCount_{Replace-Index}" class="com_input ZLCount" value="ZLCount_Value" data-options="min:0,max:100" onkeypress="if((event.keyCode<48||event.keyCode>57))event.returnValue=false;" onpaste="return false;" style="ime-mode: disabled; width: 80%; text-align: center" />
+    </td>
+    <td style="text-align: center; background-color: #ffffff;">
+        <span id="select_{Replace-Index}_ZTXS" title="请选择" style="display:inline-block;font-size:Small;height:30px;width:90px;">
+            <input id="select_{Replace-Index}_ZTXS_0" type="checkbox" name="select_{Replace-Index}_ZTXS_0">
+            <label for="select_{Replace-Index}_ZTXS_0">纸质</label>
+            <input id="select_{Replace-Index}_ZTXS_1" type="checkbox" name="select_{Replace-Index}_ZTXS_1">
+            <label for="select_{Replace-Index}_ZTXS_1">电子</label>
+        </span>
+    </td>
+    <td style="text-align: center; background-color: #ffffff;">
+        <input id="ZLBZ_{Replace-Index}" name="ZLBZ_{Replace-Index}" class="com_input ZLBZ" value="ZLBZ_Value" onchange="InputOnchange(this)" />
+    </td>
+    <td style="text-align: center; background-color: #ffffff;">
+        <img onclick="DelRow(this)" src="../images/Button/BtnDel.jpg" style="border-width: 0px;" />
+    </td>
+</tr>

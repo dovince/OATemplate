@@ -1,0 +1,128 @@
+﻿<html>
+
+<head>
+    <title>资质证照清单</title>
+    <style>
+        @font-face {
+            font-family: 仿宋;
+            panose-1: 2 1 6 0 3 1 1 1 1 1;
+        }
+
+        @font-face {
+            font-family: "Cambria Math";
+            panose-1: 2 4 5 3 5 4 6 3 2 4;
+        }
+
+        @font-face {
+            font-family: "\@仿宋";
+            panose-1: 2 1 6 0 3 1 1 1 1 1;
+        }
+        /* Style Definitions */
+        .style18 {
+            width: 260px;
+            font-family: 仿宋;
+            color: black;
+            font-size: 18px;
+        }
+
+        .td {
+            height: 100%;
+            width: 100%;
+        }
+
+        .auto-style11 {
+            width: 260px;
+            font-family: 仿宋;
+            color: black;
+            font-size: 18px;
+            height: 30px;
+        }
+
+        .auto-style12 {
+            height: 30px;
+            vertical-align: central;
+        }
+
+        .auto-style13 {
+            width: 380px;
+            font-family: 仿宋;
+            color: black;
+            font-size: 18px;
+            height: 30px;
+        }
+
+        .auto-style14 {
+            text-align: center;
+        }
+        .auto-style15 {
+            width: 80px;
+            text-align: center;
+        }
+    </style>
+    <script type="text/javascript">
+        function formatDatebox(value) {
+            var date = new Date(parseInt(value.replace("/Date(", "").replace(")/", ""), 10));
+            var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+            var currDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+            return date.getFullYear() + "/" + month + "/" + currDate;
+        }
+        $(document).ready(function () {
+            $(".lblAptitudeMouseOver").mouseover(function () {
+                var p = $(this);
+                var name = p.find("input[type='checkbox']").val();
+                $.ajax({
+                    cache: false,
+                    type: "get",
+                    data: { f: "GetAptitudeInfo", name: encodeURIComponent(name) },
+                    dataType: "text",
+                    url: "../Services/Services.ashx",
+                    success: function (data) {
+                        var res = eval('(' + data + ')');
+                        var title = "";
+                        if (res.Data == "" || res.Data == null) {
+                            title = "已归还或未借出.";
+                        } else {
+                            var model = res.Data;
+                            title = "状态:未归还" + ";"
+                                + "项目编号:" + model.项目编号 + ";"
+                                + "项目名称:" + model.项目名称 + ";"
+                                + "使用单位:" + model.使用单位 + ";"
+                                + "预计归还:" + formatDatebox(model.结束时间);
+                        }
+                        p.attr("title", title);
+                    }
+                });
+
+            });
+        });
+    </script>
+</head>
+
+<body lang="ZH-CN">
+    <span style="color: black"></span>
+
+    <div align="center">
+        <table id="Aptitudetable" class="MsoNormalTable" borderColor="#a5a5a5" border="1" cellspacing="0" style='width: auto; height: auto;'>
+            <tr style='page-break-inside: avoid; height: auto'>
+                <th style="width:80px;text-align: center;" class="auto-style14">
+                    <strong class="auto-style14">资质单位</strong>
+                </th>
+                <th class="style43" style="width: 43px;text-align: center;">
+                    <strong class="auto-style14">序号</strong>
+                </th>
+                <th style='height: 40px' class="auto-style14">
+                    <strong class="auto-style14">资质证照名称</strong>
+                </th>
+                <th style='width: 105px; height: 40px' class="auto-style14">
+                    <strong class="auto-style14">正本/副本</strong>
+                </th>
+                <th style='width: 110px; height: 40px; text-align: center;'>
+                    <strong class="auto-style14">原件/复印件</strong>
+                </th>
+            </tr>
+            {0}
+        </table>
+    </div>
+</body>
+
+</html>

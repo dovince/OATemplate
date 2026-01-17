@@ -1,0 +1,508 @@
+﻿using Aliyun.Acs.Core;
+using Aliyun.Acs.Core.Exceptions;
+using Aliyun.Acs.Core.Profile;
+using Aliyun.Acs.Dysmsapi.Model.V20170525;
+using Newtonsoft.Json.Linq;
+using NPOI.Util;
+using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Text.RegularExpressions;
+using System.Threading;
+using static System.Windows.Forms.AxHost;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
+
+/// <summary>
+/// Mobile 的摘要说明
+/// </summary>
+public class Mobile
+{
+    private static String product = ConfigurationManager.AppSettings["product"].ToString();//（短信产品名固定，无需修改）
+    private static String domain = ConfigurationManager.AppSettings["domain"].ToString();//短信API产品域名（接口地址固定，无需修改）
+    private static String accessKeyId = ConfigurationManager.AppSettings["accessKeyId"].ToString();//你的accessKeyId，参考本文档步骤2
+    private static String accessKeySecret = ConfigurationManager.AppSettings["accessKeySecret"].ToString();//你的accessKeySecret，参考本文档步骤2
+
+    private static String SignName = ConfigurationManager.AppSettings["SignName"].ToString();
+
+    #region TemplateCode
+    private static string TemplateCode_InMsg
+    {
+        get
+        {
+            return ConfigurationManager.AppSettings["TemplateCode_InMsg"].ToString();
+        }
+    }
+    private static string TemplateCode_OutMsg
+    {
+        get
+        {
+            return ConfigurationManager.AppSettings["TemplateCode_OutMsg"].ToString();
+        }
+    }
+    private static string TemplateCode_BanLi
+    {
+        get
+        {
+            return ConfigurationManager.AppSettings["TemplateCode_BanLi"].ToString();
+        }
+    }
+    private static string TemplateCode_WorkState
+    {
+        get
+        {
+            return ConfigurationManager.AppSettings["TemplateCode_WorkState"].ToString();
+        }
+    }
+    private static string TemplateCode_WorkPassCode
+    {
+        get
+        {
+            return ConfigurationManager.AppSettings["TemplateCode_WorkPassCode"].ToString();
+        }
+    }
+    private static string TemplateCode_YanZhangCode
+    {
+        get
+        {
+            return ConfigurationManager.AppSettings["TemplateCode_YanZhangCode"].ToString();
+        }
+    }
+    private static string TemplateCode_HeTongDaoZhangCode
+    {
+        get
+        {
+            return ConfigurationManager.AppSettings["TemplateCode_HeTongDaoZhangCode"].ToString();
+        }
+    }
+    private static string TemplateCode_JieShouFile
+    {
+        get
+        {
+            return ConfigurationManager.AppSettings["TemplateCode_JieShouFile"].ToString();
+        }
+    }
+    #endregion
+
+    public Mobile()
+    {
+    }
+
+    /// <summary>
+    /// 发送单条信息
+    /// </summary>
+    /// <param name="phone"></param>
+    /// <param name="smsMsg"></param>
+    /// <returns></returns>
+    public static string SendOneMSM(string fromuser, string phone, string smsMsg, string TemplateCode)
+    {
+        IClientProfile profile = DefaultProfile.GetProfile("cn-hangzhou", accessKeyId, accessKeySecret);
+        // SingleSendSmsRequest request = new SingleSendSmsRequest();
+        //初始化ascClient,暂时不支持多region（请勿修改）
+
+        DefaultProfile.AddEndpoint("cn-hangzhou", "cn-hangzhou", product, domain);
+        IAcsClient acsClient = new DefaultAcsClient(profile);
+        SendSmsRequest request = new SendSmsRequest();
+        var message = string.Empty;
+        try
+        {
+            //必填:待发送手机号。支持以逗号分隔的形式进行批量调用，批量上限为1000个手机号码,批量调用相对于单条调用及时性稍有延迟,验证码类型的短信推荐使用单条调用的方式
+            request.PhoneNumbers = phone;
+            //必填:短信签名-可在短信控制台中找到
+            request.SignName = SignName;
+            //必填:短信模板-可在短信控制台中找到
+            request.TemplateCode = TemplateCode;
+            //可选:模板中的变量替换JSON串,如模板内容为"亲爱的${name},您的验证码为${code}"时,此处的值为
+            // request.TemplateParam = "{\"name\":\"123\",\"store\":\"12222\"}";
+            request.TemplateParam = smsMsg;
+            //请求失败这里会抛ClientException异常
+            var sendSmsResponse = acsClient.GetAcsResponse(request);
+            message = sendSmsResponse.Message;
+            return message;
+        }
+        catch (ServerException e)
+        {
+            message = e.Message;
+        }
+        catch (ClientException e)
+        {
+            message = e.Message;
+        }
+        catch (Exception e)
+        {
+            message = e.Message;
+        }
+        finally
+        {
+            WriteDataInDB(fromuser, phone, smsMsg, TemplateCode, message, "", "", DateTime.Now, new Nullable<DateTime>());
+        }
+        return message;
+    }
+    /// <summary>
+    /// 批量发送短信
+    /// </summary>
+    /// <param name="fromuser"></param>
+    /// <param name="tousers"></param>
+    /// <param name="smsMsg"></param>
+    /// <param name="TemplateCode"></param>
+    /// <returns></returns>
+    public static string SendBatchMSMByUsers(string fromuser, string tousers, string smsMsg, string TemplateCode)
+    {
+        var result = string.Empty;
+        var sr = tousers.Split(',');
+        foreach (var item in sr)
+        {
+            if (string.IsNullOrEmpty(item)) continue;
+            var uModel = new ZWL.BLL.ERPUser();
+            uModel = uModel.GetModel("UserName='" + item + "'");
+            if (uModel == null || string.IsNullOrEmpty(uModel.JiaTingDianHua)) continue;
+            result = SendOneMSM(fromuser, uModel.JiaTingDianHua, smsMsg, TemplateCode);
+        }
+        return result;
+    }
+    /// <summary>
+    /// 验证码${code}，您正在登陆，若非本人操作，请勿泄露。
+    /// </summary>
+    /// <param name="ToUserList"></param>
+    /// <param name="code"></param>
+    /// <returns></returns>
+    public static string LoginCheck(string ToUserList, string code)
+    {
+        var msgs = new JObject();
+        msgs.Add("code", code);
+        return SendBatchMSMByUsers("系统消息", ToUserList, msgs.ToString(), TemplateCode_YanZhangCode);
+    }
+    /// <summary>
+    /// 内部工作通知短信
+    /// </summary>
+    /// <param name="FaSongUser"></param>
+    /// <param name="ToUserList"></param>
+    /// <param name="ContentStr"></param>
+    /// <param name="flag"></param>
+    public static string SendSMS(string FaSongUser, string ToUserList, string ContentStr)
+    {
+        string resultMsg = "";
+        JObject msgs = new JObject();
+        string templateCode = "";
+        string name = "";
+        string workname = "";
+        string time = "";
+        string regstr = "[^()]*";
+        Regex reg = new Regex(regstr);
+        var mat = reg.Matches(ContentStr);
+        for (int i = 0; i < mat.Count; i++)
+        {
+            var item = mat[i].ToString();
+            if (!string.IsNullOrEmpty(item))
+            {
+                if (item.Contains("--"))
+                {
+                    name = item.Split('-')[0];
+                    workname = item.Split('-')[2];
+                }
+                else if (!item.Contains("工作"))
+                {
+                    try
+                    {
+                        time = !string.IsNullOrEmpty(item) ? Convert.ToDateTime(item).ToString("yyyy-MM-dd") : "";
+                    }
+                    catch
+                    {
+                        time = "";
+                    }
+                }
+            }
+        }
+        if (ContentStr.Contains("您有新的工作需要办理"))
+        {
+            templateCode = TemplateCode_BanLi;
+            workname = string.IsNullOrEmpty(workname) ? ContentStr.Replace("您有新的工作需要办理！", "") : workname;
+            msgs.Add("name", name);
+            msgs.Add("time", time);
+            msgs.Add("workname", workname);
+        }
+        else
+        {
+            templateCode = TemplateCode_WorkState;
+            if (ContentStr.Contains("您的工作已经正常结束"))
+            {
+                workname = string.IsNullOrEmpty(workname) ? ContentStr = ContentStr.Replace("您的工作已经正常结束！", "") : workname;
+                msgs.Add("state", "正常结束");
+                msgs.Add("workname", workname);
+                msgs.Add("time", time);
+            }
+            else if (ContentStr.Contains("您的工作已经被强制结束"))
+            {
+                workname = string.IsNullOrEmpty(workname) ? ContentStr = ContentStr.Replace("您的工作已经被强制结束！", "") : workname;
+                msgs.Add("state", "被强制结束");
+                msgs.Add("workname", workname);
+                msgs.Add("time", time);
+            }
+            else if (ContentStr.Contains("您的工作已经被驳回"))
+            {
+                workname = string.IsNullOrEmpty(workname) ? ContentStr = ContentStr.Replace("您的工作已经被驳回！", "") : workname;
+                msgs.Add("state", "被驳回");
+                msgs.Add("workname", workname);
+                msgs.Add("time", time);
+            }
+            else if (ContentStr.Contains("您的工作没有通过审批"))
+            {
+                workname = string.IsNullOrEmpty(workname) ? ContentStr = ContentStr.Replace("您的工作没有通过审批！", "") : workname;
+                msgs.Add("state", "不通过");
+                msgs.Add("workname", workname);
+                msgs.Add("time", time);
+            }
+            else if (ContentStr.Contains("您有工作") && ContentStr.Contains("通过") && ContentStr.Contains("审核进入下一节点"))
+            {
+                templateCode = TemplateCode_WorkPassCode;
+                var list = GetMessagePairs(ContentStr);
+                if (list.Count >= 3)
+                {
+                    msgs.Add("workname", workname);
+                    msgs.Add("username", list[2]);
+                    msgs.Add("jiedian", list[3]);
+                }
+            }
+            //先不发送超时短信
+            //else if (ContentStr.Contains("您有工作未办理，已超时请及时处理"))
+            //{
+            //    workname = string.IsNullOrEmpty(workname) ? ContentStr = ContentStr.Replace("您有工作未办理，已超时请及时处理！", "") : workname;
+            //    msgs.Add("state", "超时请处理");
+            //    msgs.Add("workname", workname);
+            //    msgs.Add("time", time);
+            //}
+            else if (ContentStr.Contains("您的合同有新的到账信息"))
+            {
+                templateCode = TemplateCode_HeTongDaoZhangCode;
+                var list = GetMessagePairsSmallZhCnFlag(ContentStr);
+                var source = ContentStr.Split(' ');
+                msgs.Add("name", list[1]);
+                msgs.Add("number", source[3]);
+                msgs.Add("time", source[1]);
+            }
+            else if (ContentStr.Contains("您有新的文件需要接收"))
+            {
+                workname = string.IsNullOrEmpty(workname) ? ContentStr = ContentStr.Replace("您有新的文件需要接收！", "") : workname;
+                msgs.Add("state", "开始，需要接受文件");
+                msgs.Add("workname", workname);
+                msgs.Add("time", time);
+            }
+        }
+
+        //根据用户名列表获取手机号码 admin,test,zwl,test123
+        DataSet MyDT = ZWL.DBUtility.DbHelperSQL.GetDataSet("select UserName,JiaTingDianHua from ERPUser where UserName in('" + ToUserList.Replace(",", "','") + "')");
+        for (int i = 0; i < MyDT.Tables[0].Rows.Count; i++)
+        {
+            string username = MyDT.Tables[0].Rows[i]["UserName"].ToString();
+            string phoneNum = MyDT.Tables[0].Rows[i]["JiaTingDianHua"].ToString();
+            if (msgs.Count > 0 && !string.IsNullOrEmpty(phoneNum))
+            {
+                var list = new List<string> { "name", "workname" };
+                foreach (var item in list)
+                {
+                    if (msgs.ToString().Contains(item) && msgs[item].ToString().Length > 35)
+                    {
+                        msgs[item] = msgs[item].ToString().Substring(0, 34) + "…";
+                    }
+                }
+                resultMsg = SendOneMSM(phoneNum, msgs.ToString(), templateCode);
+            }
+            else
+            {
+                if (string.IsNullOrEmpty(phoneNum))
+                {
+                    resultMsg = "接收方的手机号码为空！";
+                }
+                if (msgs.Count <= 0)
+                {
+                    resultMsg = "请检查模板内容与模板参数是否匹配！";
+                }
+            }
+        }
+        return resultMsg;
+    }
+    /// <summary>
+    /// 内部人员短信通知
+    /// 系统通知：您的同事${fromuser}发送了一条短信，工作名称如下：${workname}。
+    /// </summary>
+    /// <param name="fromuser"></param>
+    /// <param name="ToUserList"></param>
+    /// <param name="workname"></param>
+    /// <returns></returns>
+    public static string SendSMS_InMsg(string fromuser, string ToUserList, string workname)
+    {
+        string resultMsg = "";
+        var msgs = new JObject();
+        msgs.Add("fromuser", fromuser);
+        msgs.Add("workname", workname);
+        resultMsg = SendBatchMSMByUsers(fromuser, ToUserList, msgs.ToString(), TemplateCode_InMsg);
+        return resultMsg;
+    }
+    /// <summary>
+    /// 系统通知：${fromuser}发送了一条短信给你，工作名称如下：${workname}。
+    /// </summary>
+    /// <param name="fromuser"></param>
+    /// <param name="ToUserList"></param>
+    /// <param name="workname"></param>
+    /// <returns></returns>
+    public static string SendSMS_OutMsg(string fromuser, string ToUserList, string workname)
+    {
+        string resultMsg = "";
+        var msgs = new JObject();
+        msgs.Add("fromuser", fromuser);
+        msgs.Add("workname", workname);
+        resultMsg = SendBatchMSMByUsers(fromuser, ToUserList, msgs.ToString(), TemplateCode_OutMsg);
+        return resultMsg;
+    }
+    /// <summary>
+    /// 您的合同有新的到账信息！合同${name}于${time} 到账${number}元。
+    /// </summary>
+    /// <param name="fromuser"></param>
+    /// <param name="ToUserList"></param>
+    /// <param name="name"></param>
+    /// <param name="time"></param>
+    /// <param name="number"></param>
+    /// <returns></returns>
+    public static string SendSMS_Receipt(string fromuser, string ToUserList, string name, string time, string number)
+    {
+        string resultMsg = "";
+        var msgs = new JObject();
+        msgs.Add("name", name);
+        msgs.Add("time", time);
+        msgs.Add("number", number);
+        resultMsg = SendBatchMSMByUsers(fromuser, ToUserList, msgs.ToString(), TemplateCode_HeTongDaoZhangCode);
+        return resultMsg;
+    }
+    /// <summary>
+    /// 您有工作${workname}通过${username}审核进入下一节点${jiedian}！
+    /// </summary>
+    /// <param name="fromuser"></param>
+    /// <param name="ToUserList"></param>
+    /// <param name="name"></param>
+    /// <param name="time"></param>
+    /// <param name="number"></param>
+    /// <returns></returns>
+    public static string SendSMS_WorkPass(string fromuser, string ToUserList, string workname, string username, string jiedian)
+    {
+        string resultMsg = "";
+        var msgs = new JObject();
+        msgs.Add("workname", workname);
+        msgs.Add("username", username);
+        msgs.Add("jiedian", jiedian);
+        resultMsg = SendBatchMSMByUsers(fromuser, ToUserList, msgs.ToString(), TemplateCode_WorkPassCode);
+        return resultMsg;
+    }
+    /// <summary>
+    /// 您的工作已经${state}，工作名称：${workname}，发起日期：${time}！
+    /// </summary>
+    /// <param name="fromuser"></param>
+    /// <param name="ToUserList"></param>
+    /// <param name="name"></param>
+    /// <param name="time"></param>
+    /// <param name="number"></param>
+    /// <returns></returns>
+    public static string SendSMS_WorkState(string fromuser, string ToUserList, string workname, string state, string time)
+    {
+        string resultMsg = "";
+        var msgs = new JObject();
+        msgs.Add("workname", workname);
+        msgs.Add("state", state);
+        msgs.Add("time", time);
+        resultMsg = SendBatchMSMByUsers(fromuser, ToUserList, msgs.ToString(), TemplateCode_WorkState);
+        return resultMsg;
+    }
+    /// <summary>
+    /// 您有新的工作需要办理！发起人：${name}，发起日期：${time}，工作名称：${workname}！
+    /// </summary>
+    /// <param name="fromuser"></param>
+    /// <param name="ToUserList"></param>
+    /// <param name="workname"></param>
+    /// <param name="username"></param>
+    /// <param name="time"></param>
+    /// <returns></returns>
+    public static string SendSMS_BanLi(string fromuser, string ToUserList, string workname, string username, string time)
+    {
+        string resultMsg = "";
+        var msgs = new JObject();
+        msgs.Add("workname", workname);
+        msgs.Add("name", username);
+        msgs.Add("time", time);
+        resultMsg = SendBatchMSMByUsers(fromuser, ToUserList, msgs.ToString(), TemplateCode_BanLi);
+        return resultMsg;
+    }
+    /// <summary>
+    /// 记录短信的发送情况
+    /// </summary>
+    /// <param name="ReceiveName"></param>
+    /// <param name="PhoneNum"></param>
+    /// <param name="MsgContent"></param>
+    /// <param name="Template"></param>
+    /// <param name="SendStatus"></param>
+    /// <param name="ErrCode"></param>
+    /// <param name="OutId"></param>
+    /// <param name="SendDate"></param>
+    /// <param name="ReceiveDate"></param>
+    private static void WriteDataInDB(string sendName, string PhoneNum, string MsgContent, string Template, string SendStatus, string ErrCode, string OutId, DateTime? SendDate, DateTime? ReceiveDate)
+    {
+        var aliyunMsgLog = new ZWL.BLL.AliyunMsgLog();
+        if (!sendName.Equals("NoLogin"))
+        {
+            aliyunMsgLog.SendName = sendName;
+            aliyunMsgLog.ReceiveName = ZWL.DBUtility.DbHelperSQL.GetSHSL("select TrueName from ERPUser where JiaTingDianHua ='" + PhoneNum + "'");
+            aliyunMsgLog.PhoneNum = PhoneNum;
+            aliyunMsgLog.MsgContent = MsgContent;
+            aliyunMsgLog.Template = Template;
+            aliyunMsgLog.SendStatus = SendStatus;
+            aliyunMsgLog.ErrCode = ErrCode;
+            aliyunMsgLog.OutId = OutId;
+            aliyunMsgLog.SendDate = SendDate;
+            aliyunMsgLog.ReceiveDate = ReceiveDate;
+            aliyunMsgLog.Add();
+        }
+    }
+    private static Dictionary<int, string> GetMessagePairs(string message)
+    {
+        var result = new Dictionary<int, string>();
+        if (!string.IsNullOrEmpty(message))
+        {
+            var source = message.Split('[');
+            for (int i = 0; i < source.Length; i++)
+            {
+                var item = source[i];
+                if (!item.Contains("]")) continue;
+                result.Add(result.Count + 1, item.Substring(0, item.IndexOf("]")));
+            }
+        }
+        return result;
+    }
+    public static Dictionary<int, string> GetMessagePairsSmallFlag(string message)
+    {
+        var result = new Dictionary<int, string>();
+        if (!string.IsNullOrEmpty(message))
+        {
+            var source = message.Split('(');
+            for (int i = 0; i < source.Length; i++)
+            {
+                var item = source[i];
+                if (!item.Contains(")")) continue;
+                result.Add(result.Count + 1, item.Substring(0, item.IndexOf(")")));
+            }
+        }
+        return result;
+    }
+    private static Dictionary<int, string> GetMessagePairsSmallZhCnFlag(string message)
+    {
+        var result = new Dictionary<int, string>();
+        if (!string.IsNullOrEmpty(message))
+        {
+            var source = message.Split('（');
+            for (int i = 0; i < source.Length; i++)
+            {
+                var item = source[i];
+                if (!item.Contains("）")) continue;
+                result.Add(result.Count + 1, item.Substring(0, item.IndexOf("）")));
+            }
+        }
+        return result;
+    }
+}
